@@ -32,12 +32,14 @@ public class SettingsReader {
 		return this.settingINI.get(parent, child);
 	}
 
-	public void setValue(String parent, String child, String data) {
+	public boolean setValue(String parent, String child, String data) {
 		this.settingINI.put(parent, child, data);
 		try {
 			this.settingINI.store();
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 

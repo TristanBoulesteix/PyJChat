@@ -15,11 +15,44 @@ public class Controller implements IController {
 	}
 
 	private void updateSettings() {
-		if (this.model.getPseudo().equals(null)) {
-			// PopupManager.askForPseudo();
+		if (this.model.getPseudo() == null) {
+			if (!this.model.setPseudo(this.getNewPseudo())) {
+				this.view.showUnknownErrorPopup();
+			}
+		}
+
+		if (this.model.getCurrentIP() == null) {
+			try {
+				if (!this.model.setCurrentIP()) {
+					this.view.showUnknownErrorPopup();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.view.showUnknownErrorPopup();
+			}
 		}
 	}
 
+	private String getNewPseudo() {
+		String pseudo = this.view.askForPseudo();
+
+		if (pseudo == null) {
+			System.exit(-2);
+		} else if (!pseudo.matches("^[a-zA-Z0-9_]+$") || pseudo.isEmpty()) {
+			this.view.showErrorPopup(
+					"Désolé, votre pseudo ne peut contenir que les lettre de l'alphabet latin en majuscule et minuscule ainsi que des nombres et l'\"underscore\".",
+					"Erreur - Mauvais format de pseudo");
+			return this.getNewPseudo();
+		} else if (pseudo.length() >= 10) {
+			this.view.showErrorPopup("Désolé, un pseudo ne peut contenir plus de 10 caractères.",
+					"Erreur - Mauvais format de pseudo");
+			return this.getNewPseudo();
+		}
+
+		return pseudo;
+	}
+
+	@Override
 	public void startChat() {
 
 	}

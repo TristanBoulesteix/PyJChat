@@ -9,7 +9,11 @@ public interface IModel {
 
 	public String getPseudo();
 
+	public boolean setPseudo(String pseudo);
+
 	public Object getCurrentIP();
+
+	public boolean setCurrentIP() throws Exception;
 
 	public boolean isServer();
 

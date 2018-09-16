@@ -18,7 +18,9 @@ public class Model implements IModel {
 	@Override
 	public void loadSettings() {
 		this.version = this.setReader.getValue("APP-SETTINGS", "version");
-		this.pseudo = this.setReader.getValue("APP-SETTINGS", "pseudo");
+
+		String tempPseudo = this.setReader.getValue("APP-SETTINGS", "pseudo");
+		this.pseudo = (tempPseudo.equals("null")) ? null : tempPseudo;
 
 		try {
 			String ip = this.setReader.getValue("CLIENT", "ip");
@@ -52,8 +54,20 @@ public class Model implements IModel {
 	}
 
 	@Override
+	public boolean setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+		return this.setReader.setValue("APP-SETTINGS", "pseudo", pseudo);
+	}
+
+	@Override
 	public IPv4Adress getCurrentIP() {
 		return currentIP;
+	}
+
+	@Override
+	public boolean setCurrentIP() throws Exception {
+		this.currentIP = new IPv4Adress();
+		return this.setReader.setValue("CLIENT", "ip", this.currentIP.toString());
 	}
 
 	@Override
