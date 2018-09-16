@@ -19,7 +19,7 @@ public class SettingsReader {
 	private Wini settingINI;
 
 	private SettingsReader() {
-		this.osName = (System.getProperty("os.name")).toUpperCase();
+		SettingsReader.osName = (System.getProperty("os.name")).toUpperCase();
 
 		try {
 			this.initINIFiles();

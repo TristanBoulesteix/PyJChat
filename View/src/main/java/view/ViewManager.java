@@ -3,8 +3,10 @@ package view;
 import javax.swing.JOptionPane;
 
 public class ViewManager implements IView {
-	public ViewManager() {
+	private ChatFrame frame;
 
+	public ViewManager() {
+		this.frame = new ChatFrame();
 	}
 
 	@Override
