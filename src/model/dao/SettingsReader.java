@@ -20,7 +20,7 @@ public class SettingsReader {
 
 	private SettingsReader() {
 		this.osName = (System.getProperty("os.name")).toUpperCase();
-		
+
 		try {
 			this.initINIFiles();
 		} catch (IOException e) {
@@ -28,8 +28,21 @@ public class SettingsReader {
 		}
 	}
 
+	public String getValue(String parent, String child) {
+		return this.settingINI.get(parent, child);
+	}
+
+	public void setValue(String parent, String child, String data) {
+		this.settingINI.put(parent, child, data);
+		try {
+			this.settingINI.store();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void initINIFiles() throws InvalidFileFormatException, IOException {
-		File settingFile = new File(this.getEnvToStoreSettings(),SETTINGS_NAME);
+		File settingFile = new File(this.getEnvToStoreSettings(), SETTINGS_NAME);
 
 		if (settingFile.exists() && !settingFile.isDirectory()) {
 			this.settingINI = new Wini(settingFile);
@@ -38,15 +51,15 @@ public class SettingsReader {
 			this.settingINI = new Wini(file);
 		}
 	}
-	
+
 	private String getEnvToStoreSettings() {
 		if (osName.contains("WIN")) {
 			return System.getenv("APPDATA");
-			
-		}else {
+
+		} else {
 			String workingDirectory = System.getProperty("user.home");
 			workingDirectory += "/Library/Application Support";
-			
+
 			return workingDirectory;
 		}
 	}
