@@ -1,3 +1,2 @@
 # PyJChat
-
-It's a chat using local network coded with Java and Python.
+PyJChat is a chat program in Java which use python script to the talking part. The program use the Maven architecture.
