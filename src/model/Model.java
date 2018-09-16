@@ -36,4 +36,40 @@ public class Model implements IModel {
 
 		this.id = Integer.parseInt(this.setReader.getValue("CHAT-SETTINGS", "chatID"));
 	}
+
+	@Override
+	public SettingsReader getSetReader() {
+		return setReader;
+	}
+
+	@Override
+	public String getVersion() {
+		return version;
+	}
+
+	@Override
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	@Override
+	public IPv4Adress getCurrentIP() {
+		return currentIP;
+	}
+
+	@Override
+	public boolean isServer() {
+		return server;
+	}
+
+	@Override
+	public IPv4Adress getServerIP() {
+		return serverIP;
+	}
+
+	@Override
+	public int getId() {
+		return id;
+	}
+
 }

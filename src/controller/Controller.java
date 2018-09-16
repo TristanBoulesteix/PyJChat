@@ -12,11 +12,18 @@ public class Controller implements IController {
 		this.model = model;
 		this.view = view;
 		this.model.loadSettings();
+		this.updateSettings();
 	}
 
 	@Override
 	public void startChat() {
 
+	}
+
+	private void updateSettings() {
+		if (this.model.getPseudo().equals(null)) {
+
+		}
 	}
 
 }
