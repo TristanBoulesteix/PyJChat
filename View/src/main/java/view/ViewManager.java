@@ -30,4 +30,9 @@ public class ViewManager implements IView {
 		System.exit(-4);
 	}
 
+	@Override
+	public ChatFrame getFrame() {
+		return frame;
+	}
+
 }

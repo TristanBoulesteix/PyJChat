@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -17,13 +16,16 @@ public class ChatFrame extends JFrame {
 	private JMenuBar menuBar;
 
 	public ChatFrame() {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(screenSize.width, screenSize.height);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setSize(new Dimension(1200, 1000));
 		this.setTitle("PyJChat");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.chatPanel = new ChatPanel();
 		this.menuBar = new TopMenu();
+
+		this.setContentPane(this.chatPanel);
+		this.setJMenuBar(this.menuBar);
 	}
 }

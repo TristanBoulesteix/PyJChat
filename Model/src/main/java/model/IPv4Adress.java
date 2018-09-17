@@ -16,10 +16,12 @@ public class IPv4Adress {
 			throw new Exception("Wrong ip format");
 		}
 
-		this.PART1 = ip.split(":")[0];
-		this.PART2 = ip.split(":")[1];
-		this.PART3 = ip.split(":")[2];
-		this.PART4 = ip.split(":")[3];
+		String[] ipInArray = ip.split("\\.");
+
+		this.PART1 = ipInArray[0];
+		this.PART2 = ipInArray[1];
+		this.PART3 = ipInArray[2];
+		this.PART4 = ipInArray[3];
 	}
 
 	public IPv4Adress() throws Exception {

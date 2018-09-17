@@ -54,7 +54,7 @@ public class Controller implements IController {
 
 	@Override
 	public void startChat() {
-
+		this.view.getFrame().setVisible(true);
 	}
 
 }
