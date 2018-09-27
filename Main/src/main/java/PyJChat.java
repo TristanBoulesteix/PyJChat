@@ -26,6 +26,7 @@ public class PyJChat {
 
 		} catch (IOException x) {
 			System.out.println("Another instance already running... exit.");
+			System.exit(0);
 		}
 	}
 }
