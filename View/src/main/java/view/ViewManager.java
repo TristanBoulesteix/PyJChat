@@ -1,9 +1,9 @@
-package view.frame;
+package view;
 
 import javax.swing.JOptionPane;
 
-import view.ChatFrame;
 import view.IView;
+import view.frame.ChatFrame;
 
 public class ViewManager implements IView {
 	private ChatFrame frame;

@@ -1,4 +1,4 @@
-package view;
+package view.frame;
 
 import java.awt.Dimension;
 
@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import view.frame.OptionMenuBar;
 import view.frame.component.ChatPanel;
 
 public class ChatFrame extends JFrame {
