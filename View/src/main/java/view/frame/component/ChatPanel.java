@@ -1,4 +1,4 @@
-package view.frameComponent;
+package view.frame.component;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;

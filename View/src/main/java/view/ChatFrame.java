@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import view.frameComponent.ChatPanel;
-import view.frameComponent.TopMenu;
+import view.frame.OptionMenuBar;
+import view.frame.component.ChatPanel;
 
 public class ChatFrame extends JFrame {
 	private static final long serialVersionUID = -3726360955592751689L;
@@ -23,7 +23,7 @@ public class ChatFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.chatPanel = new ChatPanel();
-		this.menuBar = new TopMenu();
+		this.menuBar = new OptionMenuBar();
 
 		this.setContentPane(this.chatPanel);
 		this.setJMenuBar(this.menuBar);

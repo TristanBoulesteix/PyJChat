@@ -6,7 +6,7 @@ import controller.IController;
 import model.IModel;
 import model.Model;
 import view.IView;
-import view.ViewManager;
+import view.frame.ViewManager;
 
 public class PyJChat {
 	private static ServerSocket SERVER_SOCKET;
