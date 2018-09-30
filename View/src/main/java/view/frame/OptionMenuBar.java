@@ -8,7 +8,7 @@ public class OptionMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 4882701602943607592L;
 
 	private JMenu file, chatSettings, about;
-	private JMenuItem pseudo, version;
+	private JMenuItem pseudo, ip, version;
 
 	public OptionMenuBar() {
 		this.file = new JMenu("Fichier");
@@ -45,6 +45,12 @@ public class OptionMenuBar extends JMenuBar {
 	private void createJMenuItemForChat() {
 		JMenuItem reload = new JMenuItem("Actualiser");
 		this.chatSettings.add(reload);
+
+		this.chatSettings.addSeparator();
+
+		this.ip = new JMenuItem();
+		this.ip.setEnabled(false);
+		this.chatSettings.add(ip);
 	}
 
 	private void createJMenuItemForAbout() {
@@ -63,6 +69,10 @@ public class OptionMenuBar extends JMenuBar {
 
 	void setPseudo(String pseudo) {
 		this.pseudo.setText(pseudo);
+	}
+
+	void setIP(String ip) {
+		this.ip.setText(ip);
 	}
 
 	void setVersion(String version) {

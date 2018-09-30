@@ -16,8 +16,8 @@ public class ChatFrame extends JFrame {
 
 	public ChatFrame() {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setSize(new Dimension(1200, 1000));
-		this.setTitle("PyJChat");
+		this.setPreferredSize(new Dimension(1200, 1000));
+		this.setTitle("PyJChat - Chargement...");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -26,5 +26,7 @@ public class ChatFrame extends JFrame {
 
 		this.setContentPane(this.chatPanel);
 		this.setJMenuBar(this.menuBar);
+
+		this.pack();
 	}
 }

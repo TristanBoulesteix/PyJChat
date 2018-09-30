@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import view.frame.ChatFrame;
 
@@ -8,6 +10,13 @@ public class ViewManager implements IView {
 	private ChatFrame frame;
 
 	public ViewManager() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+
 		this.frame = new ChatFrame();
 	}
 
