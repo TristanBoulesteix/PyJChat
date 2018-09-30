@@ -11,7 +11,7 @@ import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
 public class SettingsReader {
-	private final static String SETTINGS_NAME = "datas/settings.ini";
+	private final static String SETTINGS_NAME = "PJyChat/datas/settings.ini";
 
 	private static SettingsReader instance;
 	private static String osName;
