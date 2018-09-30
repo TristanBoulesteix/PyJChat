@@ -1,35 +1,34 @@
 package view.frame.component;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ChatPanel extends JPanel {
+import view.frame.component.mainPanelComponent.ViewPanel;
+
+public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 6339287783087067958L;
 
-	private JPanel textArea;
+	private ViewPanel viewPanel;
 	private JTextField keyZone;
 	private JButton sendButton;
 
-	public ChatPanel() {
+	public MainPanel() {
 		this.setLayout(new GridBagLayout());
 
-		this.textArea = new JPanel();
-		this.textArea.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.BLACK));
-		GridBagConstraints cTextArea = new GridBagConstraints();
-		cTextArea.gridx = 0;
-		cTextArea.gridy = 0;
-		cTextArea.weightx = 1.0;
-		cTextArea.weighty = 1.0;
-		cTextArea.fill = GridBagConstraints.BOTH;
-		this.add(this.textArea, cTextArea);
+		this.viewPanel = new ViewPanel();
+		GridBagConstraints cViewPanel = new GridBagConstraints();
+		cViewPanel.gridx = 0;
+		cViewPanel.gridy = 0;
+		cViewPanel.weightx = 1.0;
+		cViewPanel.weighty = 1.0;
+		cViewPanel.fill = GridBagConstraints.BOTH;
+		this.add(this.viewPanel, cViewPanel);
 
 		ParticipantPanel participant = new ParticipantPanel();
 		GridBagConstraints cParticipant = new GridBagConstraints();
@@ -58,4 +57,7 @@ public class ChatPanel extends JPanel {
 		pKeyZone.add(this.sendButton, BorderLayout.EAST);
 	}
 
+	public ViewPanel getViewPanel() {
+		return this.viewPanel;
+	}
 }

@@ -55,6 +55,18 @@ public class Controller implements IController {
 	@Override
 	public void startChat() {
 		this.view.getFrame().setVisible(true);
+
+		if (this.model.isServer()) {
+			this.startChatAsServer();
+		} else if ((this.model.getServerIP()) != null) {
+			String ipServer = this.model.getServerIP().toString();
+		} else {
+			this.view.initNewChat();
+		}
+	}
+
+	private void startChatAsServer() {
+
 	}
 
 }

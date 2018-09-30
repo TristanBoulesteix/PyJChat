@@ -46,4 +46,11 @@ public class ViewManager implements IView {
 		return frame;
 	}
 
+	@Override
+	public void initNewChat() {
+		this.getFrame().setSubtitle("Initialisation");
+
+		this.getFrame().getMainPanel().getViewPanel().showInitPanel();
+	}
+
 }

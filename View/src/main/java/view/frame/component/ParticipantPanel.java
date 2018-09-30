@@ -6,16 +6,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class ParticipantPanel extends JPanel {
 	private static final long serialVersionUID = -6477239056444259015L;
+
 	private JTextField label;
+	private JScrollPane participantList;
 
 	public ParticipantPanel() {
 		this.setLayout(new BorderLayout(0, 0));
-		this.setPreferredSize(new Dimension(100, 400));
+		this.setPreferredSize(new Dimension(600, 400));
 
 		this.label = new JTextField();
 		this.label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -28,9 +31,8 @@ public class ParticipantPanel extends JPanel {
 		this.add(label, BorderLayout.NORTH);
 		this.label.setColumns(10);
 
-		JPanel participantsList = new JPanel();
-		this.add(participantsList, BorderLayout.CENTER);
-
+		this.participantList = new JScrollPane();
+		this.add(this.participantList, BorderLayout.CENTER);
 	}
 
 }

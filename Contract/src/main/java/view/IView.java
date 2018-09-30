@@ -10,4 +10,6 @@ public interface IView {
 	public void showUnknownErrorPopup();
 
 	public JFrame getFrame();
+
+	public void initNewChat();
 }
