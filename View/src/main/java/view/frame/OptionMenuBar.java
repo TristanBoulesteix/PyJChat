@@ -48,6 +48,14 @@ public class OptionMenuBar extends JMenuBar {
 	}
 
 	private void createJMenuItemForAbout() {
+		JMenuItem aboutMe = new JMenuItem("Á propos du développeur");
+		this.about.add(aboutMe);
+
+		JMenuItem change = new JMenuItem("Changelog");
+		this.about.add(change);
+
+		this.about.addSeparator();
+
 		this.version = new JMenuItem();
 		this.version.setEnabled(false);
 		this.about.add(this.version);
