@@ -1,4 +1,6 @@
-D:\pyJChat\PyJChat\View\src\main\java\view\frameComponent\TopMenu.java
-D:\pyJChat\PyJChat\View\src\main\java\view\ChatFrame.java
+D:\pyJChat\PyJChat\View\src\main\java\view\frame\ChatFrame.java
+D:\pyJChat\PyJChat\View\src\main\java\view\frame\component\MainPanel.java
+D:\pyJChat\PyJChat\View\src\main\java\view\frame\component\mainPanelComponent\ViewPanel.java
 D:\pyJChat\PyJChat\View\src\main\java\view\ViewManager.java
-D:\pyJChat\PyJChat\View\src\main\java\view\frameComponent\ChatPanel.java
+D:\pyJChat\PyJChat\View\src\main\java\view\frame\component\ParticipantPanel.java
+D:\pyJChat\PyJChat\View\src\main\java\view\frame\OptionMenuBar.java
