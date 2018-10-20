@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
@@ -78,6 +79,11 @@ public class ViewPanel extends JPanel {
 			JRadioButton joinServer = new JRadioButton("Rejoindre un serveur");
 			group.add(newServer);
 			group.add(joinServer);
+			
+			JPanel radioCountainer = new JPanel(new GridLayout(1, 0));
+			radioCountainer.add(newServer);
+			radioCountainer.add(joinServer);
+			serverSelector.add(radioCountainer, BorderLayout.SOUTH);			
 		}
 	}
 }
