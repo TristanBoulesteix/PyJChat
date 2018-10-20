@@ -26,6 +26,7 @@ public class ChatFrame extends JFrame {
 		this.setContentPane(this.mainPanel);
 		this.setJMenuBar(this.menuBar);
 
+		this.revalidate();
 		this.pack();
 	}
 

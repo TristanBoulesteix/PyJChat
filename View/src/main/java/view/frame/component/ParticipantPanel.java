@@ -18,7 +18,7 @@ public class ParticipantPanel extends JPanel {
 
 	public ParticipantPanel() {
 		this.setLayout(new BorderLayout(0, 0));
-		this.setPreferredSize(new Dimension(600, 400));
+		this.setPreferredSize(new Dimension(400, 400));
 
 		this.label = new JTextField();
 		this.label.setHorizontalAlignment(SwingConstants.CENTER);

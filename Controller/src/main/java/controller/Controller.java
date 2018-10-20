@@ -63,6 +63,8 @@ public class Controller implements IController {
 		} else {
 			this.view.initNewChat();
 		}
+		
+		this.view.getFrame().revalidate();
 	}
 
 	private void startChatAsServer() {

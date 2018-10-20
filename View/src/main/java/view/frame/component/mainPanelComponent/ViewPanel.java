@@ -8,8 +8,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class ViewPanel extends JPanel {
 	private static final long serialVersionUID = -8995991585591533480L;
@@ -50,9 +54,30 @@ public class ViewPanel extends JPanel {
 			cTitleInit.gridy = 0;
 			cTitleInit.weightx = 1.0;
 			cTitleInit.fill = GridBagConstraints.BOTH;
-			cTitleInit.insets = new Insets(0, 5, 6, 5);
+			cTitleInit.insets = new Insets(2, 10, 2, 10);
 			this.add(titleInit, cTitleInit);
-
+			
+			JPanel serverSelector = new JPanel();
+			serverSelector.setLayout(new BorderLayout());
+			serverSelector.setBackground(Color.LIGHT_GRAY);
+			serverSelector.setBorder(new TitledBorder("Rejoindre une conversation"));
+			
+			GridBagConstraints cServerSelector = new GridBagConstraints();
+			cServerSelector.gridx = 0;
+			cServerSelector.gridy = 1;
+			cServerSelector.weightx = 1.0;
+			cServerSelector.fill = GridBagConstraints.BOTH;
+			this.add(serverSelector, cServerSelector);
+			JTextArea explaination = new JTextArea("Vous n'êtes connecté à aucun chat pour le moment. Vous pouvez créer un nouveau serveur ou en rejoindre un.");
+			explaination.setEditable(false);
+			explaination.setEnabled(false);
+			serverSelector.add(explaination, BorderLayout.NORTH);
+			
+			ButtonGroup group = new ButtonGroup();
+			JRadioButton newServer = new JRadioButton("Créer un nouveau serveur");
+			JRadioButton joinServer = new JRadioButton("Rejoindre un serveur");
+			group.add(newServer);
+			group.add(joinServer);
 		}
 	}
 }
