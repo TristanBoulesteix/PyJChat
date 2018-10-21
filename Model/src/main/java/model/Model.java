@@ -1,9 +1,12 @@
 package model;
 
+import model.dao.SQLiteJDBC;
 import model.dao.SettingsReader;
 
 public class Model implements IModel {
-	private SettingsReader setReader;
+	private final SettingsReader SETTINGS_READER;
+	private final SQLiteJDBC DATABASE_READER;
+
 	private String version;
 	private String pseudo;
 	private IPv4Adress currentIP;
@@ -12,77 +15,79 @@ public class Model implements IModel {
 	private int id;
 
 	public Model() {
-		this.setReader = SettingsReader.getInstance();
+		this.SETTINGS_READER = SettingsReader.getInstance();
+		this.DATABASE_READER = SQLiteJDBC.getInstance();
 	}
 
 	@Override
 	public void loadSettings() {
-		this.version = this.setReader.getValue("APP-SETTINGS", "version");
+		this.version = this.SETTINGS_READER.getValue("APP-SETTINGS", "version");
 
-		String tempPseudo = this.setReader.getValue("APP-SETTINGS", "pseudo");
+		String tempPseudo = this.SETTINGS_READER.getValue("APP-SETTINGS", "pseudo");
 		this.pseudo = (tempPseudo.equals("null")) ? null : tempPseudo;
 
 		try {
-			String ip = this.setReader.getValue("CLIENT", "ip");
-			this.currentIP = (this.setReader.getValue("CLIENT", "ip").equals("null")) ? null : new IPv4Adress(ip);
+			String ip = this.SETTINGS_READER.getValue("CLIENT", "ip");
+			this.currentIP = (this.SETTINGS_READER.getValue("CLIENT", "ip").equals("null")) ? null : new IPv4Adress(ip);
 
-			ip = this.setReader.getValue("CHAT-SETTINGS", "ip");
-			this.serverIP = (this.setReader.getValue("CHAT-SETTINGS", "ip").equals("null")) ? null : new IPv4Adress(ip);
+			ip = this.SETTINGS_READER.getValue("CHAT-SETTINGS", "ip");
+			this.serverIP = (this.SETTINGS_READER.getValue("CHAT-SETTINGS", "ip").equals("null")) ? null
+					: new IPv4Adress(ip);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		this.server = Boolean.parseBoolean(this.setReader.getValue("CHAT-SETTINGS", "server"));
+		this.server = Boolean.parseBoolean(this.SETTINGS_READER.getValue("CHAT-SETTINGS", "server"));
 
-		this.id = Integer.parseInt(this.setReader.getValue("CHAT-SETTINGS", "chatID"));
+		this.id = Integer.parseInt(this.SETTINGS_READER.getValue("CHAT-SETTINGS", "chatID"));
 	}
 
 	@Override
-	public SettingsReader getSetReader() {
-		return setReader;
+	public SettingsReader getSettingsReader() {
+		return this.SETTINGS_READER;
 	}
 
 	@Override
 	public String getVersion() {
-		return version;
+		return this.version;
 	}
 
 	@Override
 	public String getPseudo() {
-		return pseudo;
+		return this.pseudo;
 	}
 
 	@Override
 	public boolean setPseudo(String pseudo) {
 		this.pseudo = pseudo;
-		return this.setReader.setValue("APP-SETTINGS", "pseudo", pseudo);
+		return this.SETTINGS_READER.setValue("APP-SETTINGS", "pseudo", pseudo);
 	}
 
 	@Override
 	public IPv4Adress getCurrentIP() {
-		return currentIP;
+		return this.currentIP;
 	}
 
 	@Override
 	public boolean setCurrentIP() throws Exception {
 		this.currentIP = new IPv4Adress();
-		return this.setReader.setValue("CLIENT", "ip", this.currentIP.toString());
+		return this.SETTINGS_READER.setValue("CLIENT", "ip", this.currentIP.toString());
 	}
 
 	@Override
 	public boolean isServer() {
-		return server;
+		return this.server;
 	}
 
 	@Override
 	public IPv4Adress getServerIP() {
-		return serverIP;
+		return this.serverIP;
 	}
 
 	@Override
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 }

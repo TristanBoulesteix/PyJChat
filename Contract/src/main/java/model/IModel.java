@@ -3,7 +3,7 @@ package model;
 public interface IModel {
 	public void loadSettings();
 
-	public Object getSetReader();
+	public Object getSettingsReader();
 
 	public String getVersion();
 
