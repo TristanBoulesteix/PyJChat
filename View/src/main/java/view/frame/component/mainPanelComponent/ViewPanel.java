@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -17,6 +19,8 @@ import javax.swing.border.TitledBorder;
 
 public class ViewPanel extends JPanel {
 	private static final long serialVersionUID = -8995991585591533480L;
+
+	private final ActionListener checkRadio = new LaunchRadioAction();
 
 	private InitPanel init;
 
@@ -33,6 +37,19 @@ public class ViewPanel extends JPanel {
 		this.init = new InitPanel();
 
 		this.add(this.init, BorderLayout.CENTER);
+	}
+
+	private class LaunchRadioAction implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String action = e.getActionCommand();
+
+			if (action.equals("create")) {
+				ViewPanel.this.init.showCreate();
+			} else if (action.equals("join")) {
+				ViewPanel.this.init.showJoin();
+			}
+		}
 	}
 
 	private class InitPanel extends JPanel {
@@ -79,6 +96,10 @@ public class ViewPanel extends JPanel {
 			ButtonGroup group = new ButtonGroup();
 			JRadioButton newServer = new JRadioButton("Créer un nouveau serveur");
 			JRadioButton joinServer = new JRadioButton("Rejoindre un serveur");
+			newServer.setActionCommand("new");
+			joinServer.setActionCommand("join");
+			newServer.addActionListener(ViewPanel.this.checkRadio);
+			joinServer.addActionListener(ViewPanel.this.checkRadio);
 			group.add(newServer);
 			group.add(joinServer);
 
@@ -88,6 +109,14 @@ public class ViewPanel extends JPanel {
 			radioCountainer.add(newServer, cRadio);
 			radioCountainer.add(joinServer, cRadio);
 			serverSelector.add(radioCountainer, BorderLayout.SOUTH);
+		}
+
+		public void showCreate() {
+
+		}
+
+		public void showJoin() {
+
 		}
 	}
 }
