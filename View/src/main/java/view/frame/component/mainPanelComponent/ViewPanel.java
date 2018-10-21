@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
@@ -57,33 +56,38 @@ public class ViewPanel extends JPanel {
 			cTitleInit.fill = GridBagConstraints.BOTH;
 			cTitleInit.insets = new Insets(2, 10, 2, 10);
 			this.add(titleInit, cTitleInit);
-			
+
 			JPanel serverSelector = new JPanel();
 			serverSelector.setLayout(new BorderLayout());
 			serverSelector.setBackground(Color.LIGHT_GRAY);
 			serverSelector.setBorder(new TitledBorder("Rejoindre une conversation"));
-			
+
 			GridBagConstraints cServerSelector = new GridBagConstraints();
 			cServerSelector.gridx = 0;
 			cServerSelector.gridy = 1;
 			cServerSelector.weightx = 1.0;
+			cServerSelector.insets = new Insets(2, 10, 2, 10);
 			cServerSelector.fill = GridBagConstraints.BOTH;
 			this.add(serverSelector, cServerSelector);
-			JTextArea explaination = new JTextArea("Vous n'êtes connecté à aucun chat pour le moment. Vous pouvez créer un nouveau serveur ou en rejoindre un.");
+			JTextArea explaination = new JTextArea(
+					"Vous n'êtes connecté à aucun chat pour le moment. Vous pouvez créer un nouveau serveur ou en rejoindre un.");
 			explaination.setEditable(false);
 			explaination.setEnabled(false);
+			explaination.setDisabledTextColor(Color.BLACK);
 			serverSelector.add(explaination, BorderLayout.NORTH);
-			
+
 			ButtonGroup group = new ButtonGroup();
 			JRadioButton newServer = new JRadioButton("Créer un nouveau serveur");
 			JRadioButton joinServer = new JRadioButton("Rejoindre un serveur");
 			group.add(newServer);
 			group.add(joinServer);
-			
-			JPanel radioCountainer = new JPanel(new GridLayout(1, 0));
-			radioCountainer.add(newServer);
-			radioCountainer.add(joinServer);
-			serverSelector.add(radioCountainer, BorderLayout.SOUTH);			
+
+			JPanel radioCountainer = new JPanel(new GridBagLayout());
+			GridBagConstraints cRadio = new GridBagConstraints();
+			cRadio.ipadx = 200;
+			radioCountainer.add(newServer, cRadio);
+			radioCountainer.add(joinServer, cRadio);
+			serverSelector.add(radioCountainer, BorderLayout.SOUTH);
 		}
 	}
 }

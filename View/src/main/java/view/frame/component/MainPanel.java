@@ -34,7 +34,7 @@ public class MainPanel extends JPanel {
 		GridBagConstraints cParticipant = new GridBagConstraints();
 		cParticipant.gridx = 1;
 		cParticipant.gridy = 0;
-		cParticipant.fill = GridBagConstraints.VERTICAL;
+		cParticipant.fill = GridBagConstraints.BOTH;
 		this.add(participant, cParticipant);
 
 		JPanel pKeyZone = new JPanel();
