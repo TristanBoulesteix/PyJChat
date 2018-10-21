@@ -2,15 +2,18 @@ package view.frame.component.mainPanelComponent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -55,6 +58,9 @@ public class ViewPanel extends JPanel {
 	private class InitPanel extends JPanel {
 		private static final long serialVersionUID = -572210260355410467L;
 
+		private JPanel serverSelector;
+		private JPanel serverSelectorContainer = null;
+
 		public InitPanel() {
 			this.setLayout(new GridBagLayout());
 
@@ -74,10 +80,10 @@ public class ViewPanel extends JPanel {
 			cTitleInit.insets = new Insets(2, 10, 2, 10);
 			this.add(titleInit, cTitleInit);
 
-			JPanel serverSelector = new JPanel();
-			serverSelector.setLayout(new BorderLayout());
-			serverSelector.setBackground(Color.LIGHT_GRAY);
-			serverSelector.setBorder(new TitledBorder("Rejoindre une conversation"));
+			this.serverSelector = new JPanel();
+			this.serverSelector.setLayout(new BorderLayout());
+			this.serverSelector.setBackground(Color.LIGHT_GRAY);
+			this.serverSelector.setBorder(new TitledBorder("Rejoindre une conversation"));
 
 			GridBagConstraints cServerSelector = new GridBagConstraints();
 			cServerSelector.gridx = 0;
@@ -85,18 +91,18 @@ public class ViewPanel extends JPanel {
 			cServerSelector.weightx = 1.0;
 			cServerSelector.insets = new Insets(2, 10, 2, 10);
 			cServerSelector.fill = GridBagConstraints.BOTH;
-			this.add(serverSelector, cServerSelector);
+			this.add(this.serverSelector, cServerSelector);
 			JTextArea explaination = new JTextArea(
 					"Vous n'êtes connecté à aucun chat pour le moment. Vous pouvez créer un nouveau serveur ou en rejoindre un.");
 			explaination.setEditable(false);
 			explaination.setEnabled(false);
 			explaination.setDisabledTextColor(Color.BLACK);
-			serverSelector.add(explaination, BorderLayout.NORTH);
+			this.serverSelector.add(explaination, BorderLayout.NORTH);
 
 			ButtonGroup group = new ButtonGroup();
 			JRadioButton newServer = new JRadioButton("Créer un nouveau serveur");
 			JRadioButton joinServer = new JRadioButton("Rejoindre un serveur");
-			newServer.setActionCommand("new");
+			newServer.setActionCommand("create");
 			joinServer.setActionCommand("join");
 			newServer.addActionListener(ViewPanel.this.checkRadio);
 			joinServer.addActionListener(ViewPanel.this.checkRadio);
@@ -108,15 +114,50 @@ public class ViewPanel extends JPanel {
 			cRadio.ipadx = 200;
 			radioCountainer.add(newServer, cRadio);
 			radioCountainer.add(joinServer, cRadio);
-			serverSelector.add(radioCountainer, BorderLayout.SOUTH);
+			this.serverSelector.add(radioCountainer, BorderLayout.CENTER);
+		}
+
+		private void updatePanelContent() {
+			this.invalidate();
+			this.repaint();
+			this.revalidate();
 		}
 
 		public void showCreate() {
+			if (this.serverSelectorContainer != null) {
+				this.serverSelector.remove(this.serverSelectorContainer);
+				this.updatePanelContent();
+			}
 
+			GridLayout layout = new GridLayout(2, 0);
+			layout.setVgap(10);
+
+			this.serverSelectorContainer = new JPanel(layout);
+
+			JTextArea area = new JTextArea(
+					"Vous êtes sur le point de créer un serveur de PyJChat. Cela signifie que vous conserverez l'historique des conversations. Si vous supprimez les données ou que vous désactivez l'application, tous les participants perdront leurs données.");
+			area.setLineWrap(true);
+			area.setWrapStyleWord(true);
+			area.setEditable(false);
+			area.setEnabled(false);
+			area.setDisabledTextColor(new Color(0, 0, 255));
+			this.serverSelectorContainer.add(area);
+
+			JButton createServer = new JButton("Créer un serveur et démarrer le chat");
+			createServer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			createServer.setFont(new Font("Arial", Font.PLAIN, 18));
+			this.serverSelectorContainer.add(createServer);
+
+			this.serverSelector.add(this.serverSelectorContainer, BorderLayout.SOUTH);
+
+			this.updatePanelContent();
 		}
 
 		public void showJoin() {
-
+			if (this.serverSelectorContainer != null) {
+				this.serverSelector.remove(this.serverSelectorContainer);
+				this.updatePanelContent();
+			}
 		}
 	}
 }
