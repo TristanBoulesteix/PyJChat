@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLiteJDBC {
+	private static final String DATABASE_PATH = "pyjchat.db";
+
 	private static SQLiteJDBC instance = null;
 
 	private Connection connection = null;
@@ -12,9 +14,8 @@ public class SQLiteJDBC {
 	private SQLiteJDBC() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			this.connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+			this.connection = DriverManager.getConnection("jdbc:sqlite:" + DATABASE_PATH);
 			this.connection.setAutoCommit(false);
-			System.out.println("Opened database successfully");
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
