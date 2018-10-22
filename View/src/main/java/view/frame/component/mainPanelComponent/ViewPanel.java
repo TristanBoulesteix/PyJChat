@@ -158,6 +158,12 @@ public class ViewPanel extends JPanel {
 				this.serverSelector.remove(this.serverSelectorContainer);
 				this.updatePanelContent();
 			}
+
+			GridLayout layout = new GridLayout(2, 0);
+			layout.setVgap(10);
+
+			this.serverSelector = new JPanel(layout);
+
 		}
 	}
 }
