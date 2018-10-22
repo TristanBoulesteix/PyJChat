@@ -1,5 +1,6 @@
 package model;
 
+import model.chatObject.IPv4Adress;
 import model.dao.SQLiteJDBC;
 import model.dao.SettingsReader;
 

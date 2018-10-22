@@ -1,4 +1,4 @@
-package model;
+package model.chatObject;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;
