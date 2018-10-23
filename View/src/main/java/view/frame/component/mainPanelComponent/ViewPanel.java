@@ -163,7 +163,7 @@ public class ViewPanel extends JPanel {
 				this.updatePanelContent();
 			}
 
-			GridLayout layout = new GridLayout(2, 0);
+			GridLayout layout = new GridLayout(3, 0);
 			layout.setVgap(10);
 
 			this.serverSelectorContainer = new JPanel(layout);
