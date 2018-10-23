@@ -28,6 +28,7 @@ public class ViewPanel extends JPanel {
 	private static final long serialVersionUID = -8995991585591533480L;
 
 	private final ActionListener checkRadio = new LaunchRadioAction();
+	private final ActionListener checkButton = new StartChatWithButton();
 
 	private InitPanel init;
 
@@ -55,6 +56,17 @@ public class ViewPanel extends JPanel {
 				ViewPanel.this.init.showCreate();
 			} else if (action.equals("join")) {
 				ViewPanel.this.init.showJoin();
+			}
+		}
+	}
+
+	private class StartChatWithButton implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String action = e.getActionCommand();
+
+			if (action.equals("new")) {
+
 			}
 		}
 	}
@@ -150,6 +162,8 @@ public class ViewPanel extends JPanel {
 			JButton createServer = new JButton("Créer un serveur et démarrer le chat");
 			createServer.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			createServer.setFont(new Font("Arial", Font.PLAIN, 18));
+			createServer.setActionCommand("new");
+			createServer.addActionListener(ViewPanel.this.checkButton);
 			this.serverSelectorContainer.add(createServer);
 
 			this.serverSelector.add(this.serverSelectorContainer, BorderLayout.SOUTH);
@@ -184,6 +198,8 @@ public class ViewPanel extends JPanel {
 			JButton validId = new JButton("Se connecter au serveur");
 			validId.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			validId.setFont(new Font("Arial", Font.PLAIN, 18));
+			validId.setActionCommand(recordId.getText());
+			validId.addActionListener(ViewPanel.this.checkButton);
 			this.serverSelectorContainer.add(validId);
 
 			this.serverSelector.add(this.serverSelectorContainer, BorderLayout.SOUTH);
@@ -198,6 +214,7 @@ public class ViewPanel extends JPanel {
 				if (limit <= 0) {
 					throw new IllegalArgumentException("Limit can not be <= 0");
 				}
+
 				this.limit = limit;
 			}
 
