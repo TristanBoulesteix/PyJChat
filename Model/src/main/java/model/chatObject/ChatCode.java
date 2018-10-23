@@ -21,7 +21,7 @@ public class ChatCode {
 		this.valide = true;
 	}
 
-	public ChatCode(ChatCode chatCode) {
+	public ChatCode(ChatCode chatCode) throws IllegalArgumentException, NumberFormatException {
 		this(chatCode.getServerAdress().toString(), Integer.toString(chatCode.getChatId()));
 	}
 
