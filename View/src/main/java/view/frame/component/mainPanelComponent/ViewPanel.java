@@ -19,6 +19,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 public class ViewPanel extends JPanel {
 	private static final long serialVersionUID = -8995991585591533480L;
@@ -162,7 +166,53 @@ public class ViewPanel extends JPanel {
 			GridLayout layout = new GridLayout(2, 0);
 			layout.setVgap(10);
 
-			this.serverSelector = new JPanel(layout);
+			this.serverSelectorContainer = new JPanel(layout);
+
+			JTextArea area = new JTextArea(
+					"Pour vous connecter à un nouveau serveur, veuillez entrer la clef de serveur.");
+			area.setLineWrap(true);
+			area.setWrapStyleWord(true);
+			area.setEditable(false);
+			area.setEnabled(false);
+			area.setDisabledTextColor(new Color(0, 0, 255));
+			this.serverSelectorContainer.add(area);
+
+			JTextField recordId = new JTextField();
+			((AbstractDocument) recordId.getDocument()).setDocumentFilter(new LimitDocumentFilter(16));
+			this.serverSelectorContainer.add(recordId);
+
+			JButton validId = new JButton("Se connecter au serveur");
+			validId.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			validId.setFont(new Font("Arial", Font.PLAIN, 18));
+			this.serverSelectorContainer.add(validId);
+
+			this.serverSelector.add(this.serverSelectorContainer, BorderLayout.SOUTH);
+
+			this.updatePanelContent();
+		}
+
+		private class LimitDocumentFilter extends DocumentFilter {
+			private int limit;
+
+			public LimitDocumentFilter(int limit) {
+				if (limit <= 0) {
+					throw new IllegalArgumentException("Limit can not be <= 0");
+				}
+				this.limit = limit;
+			}
+
+			@Override
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+					throws BadLocationException {
+				int currentLength = fb.getDocument().getLength();
+				int overLimit = (currentLength + text.length()) - this.limit - length;
+				if (overLimit > 0) {
+					text = text.substring(0, text.length() - overLimit);
+				}
+				if (text.length() > 0) {
+					super.replace(fb, offset, length, text, attrs);
+				}
+			}
 
 		}
 	}
