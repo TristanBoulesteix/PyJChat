@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import contract.util.Observer;
 import view.frame.ChatFrame;
 
 public class ViewManager implements IView {
@@ -43,12 +44,14 @@ public class ViewManager implements IView {
 
 	@Override
 	public ChatFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	@Override
-	public void initNewChat() {
+	public void initNewChat(Observer controller) {
 		this.getFrame().setSubtitle("Initialisation");
+
+		this.getFrame().getMainPanel().getViewPanel().attach(controller);
 
 		this.getFrame().getMainPanel().getViewPanel().showInitPanel();
 	}

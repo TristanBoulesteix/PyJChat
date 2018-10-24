@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JFrame;
 
+import contract.util.Observer;
+
 public interface IView {
 	public String askForPseudo();
 
@@ -11,5 +13,5 @@ public interface IView {
 
 	public JFrame getFrame();
 
-	public void initNewChat();
+	public void initNewChat(Observer controller);
 }

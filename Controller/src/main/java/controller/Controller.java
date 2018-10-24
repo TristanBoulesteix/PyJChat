@@ -1,9 +1,10 @@
 package controller;
 
+import contract.util.Observer;
 import model.IModel;
 import view.IView;
 
-public class Controller implements IController {
+public class Controller implements IController, Observer {
 	private IModel model;
 	private IView view;
 
@@ -61,14 +62,21 @@ public class Controller implements IController {
 		} else if ((this.model.getServerIP()) != null) {
 			String ipServer = this.model.getServerIP().toString();
 		} else {
-			this.view.initNewChat();
+			this.view.initNewChat(this);
 		}
-		
+
 		this.view.getFrame().revalidate();
 	}
 
 	private void startChatAsServer() {
 
+	}
+
+	@Override
+	synchronized public void update(String command) {
+		if (command.equals("new")) {
+			System.out.println("Success");
+		}
 	}
 
 }

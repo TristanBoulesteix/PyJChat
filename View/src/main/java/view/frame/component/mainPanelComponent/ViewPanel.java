@@ -10,6 +10,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -24,9 +26,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
+import contract.util.Observer;
+
 public class ViewPanel extends JPanel {
 	private static final long serialVersionUID = -8995991585591533480L;
 
+	private List<Observer> observers = new ArrayList<Observer>();
 	private final ActionListener checkRadio = new LaunchRadioAction();
 	private final ActionListener checkButton = new StartChatWithButton();
 
@@ -47,6 +52,16 @@ public class ViewPanel extends JPanel {
 		this.add(this.init, BorderLayout.CENTER);
 	}
 
+	public void attach(Observer observer) {
+		this.observers.add(observer);
+	}
+
+	private void notifyAllObservers(String command) {
+		for (Observer observer : this.observers) {
+			observer.update(command);
+		}
+	}
+
 	private class LaunchRadioAction implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -63,11 +78,7 @@ public class ViewPanel extends JPanel {
 	private class StartChatWithButton implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String action = e.getActionCommand();
-
-			if (action.equals("new")) {
-
-			}
+			ViewPanel.this.notifyAllObservers(e.getActionCommand());
 		}
 	}
 
