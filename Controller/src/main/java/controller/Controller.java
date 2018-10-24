@@ -75,7 +75,7 @@ public class Controller implements IController, Observer {
 	@Override
 	synchronized public void update(String command) {
 		if (command.equals("new")) {
-			System.out.println("Success");
+			this.startChatAsServer();
 		}
 	}
 
