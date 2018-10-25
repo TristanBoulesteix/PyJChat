@@ -1,12 +1,14 @@
 package controller;
 
 import contract.util.Observer;
+import controller.server.ServerMaster;
 import model.IModel;
 import view.IView;
 
 public class Controller implements IController, Observer {
 	private IModel model;
 	private IView view;
+	private ServerMaster serverMaster = null;
 
 	public Controller(IModel model, IView view) {
 		this.model = model;
@@ -69,12 +71,13 @@ public class Controller implements IController, Observer {
 	}
 
 	private void startChatAsServer() {
-
+		this.serverMaster = new ServerMaster();
 	}
 
 	@Override
 	synchronized public void update(String command) {
 		if (command.equals("new")) {
+			this.model.initializeServerDatas();
 			this.startChatAsServer();
 		}
 	}
