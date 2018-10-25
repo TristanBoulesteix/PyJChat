@@ -5,6 +5,8 @@ public interface IModel {
 
 	public Object getSettingsReader();
 
+	public void initializeServerDatas();
+
 	public String getVersion();
 
 	public String getPseudo();

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import model.chatObject.IPv4Adress;
 import model.dao.SQLiteJDBC;
 import model.dao.SettingsReader;
@@ -42,6 +44,13 @@ public class Model implements IModel {
 		this.server = Boolean.parseBoolean(this.SETTINGS_READER.getValue("CHAT-SETTINGS", "server"));
 
 		this.id = Integer.parseInt(this.SETTINGS_READER.getValue("CHAT-SETTINGS", "chatID"));
+	}
+
+	@Override
+	public void initializeServerDatas() {
+		this.setChatId(ThreadLocalRandom.current().nextInt(0, 99 + 1));
+		this.SETTINGS_READER.setValue("CHAT-SETTINGS", "server", Boolean.toString(true));
+		this.SETTINGS_READER.setValue("CHAT-SETTINGS", "ip", this.currentIP.toString());
 	}
 
 	@Override
@@ -91,4 +100,7 @@ public class Model implements IModel {
 		return this.id;
 	}
 
+	private void setChatId(int id) {
+		this.SETTINGS_READER.setValue("CHAT-SETTINGS", "chatID", Integer.toString(id));
+	}
 }
