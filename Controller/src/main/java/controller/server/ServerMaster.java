@@ -13,8 +13,6 @@ public class ServerMaster {
 		PythonInterpreter.initialize(System.getProperties(), System.getProperties(), new String[0]);
 		this.pythonInterpreter = new PythonInterpreter();
 
-		System.out.println(this.SERVER_PATH);
-
 		this.pythonInterpreter.execfile(this.SERVER_PATH);
 	}
 }
