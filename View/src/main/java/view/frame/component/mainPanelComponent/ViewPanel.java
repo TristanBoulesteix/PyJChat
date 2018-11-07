@@ -10,12 +10,17 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -36,14 +41,18 @@ public class ViewPanel extends JPanel {
 	private final ActionListener checkButton = new StartChatWithButton();
 
 	private InitPanel init;
+	private LoadingPanel loading;
 
 	public ViewPanel() {
 		this.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, Color.BLACK));
 		this.setLayout(new BorderLayout());
-	}
 
-	public InitPanel getInitPanel() {
-		return (this.init == null) ? this.init = new InitPanel() : this.init;
+		try {
+			this.loading = new LoadingPanel();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void showInitPanel() {
@@ -78,7 +87,23 @@ public class ViewPanel extends JPanel {
 	private class StartChatWithButton implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			ViewPanel.this.add(ViewPanel.this.loading, BorderLayout.CENTER);
 			ViewPanel.this.notifyAllObservers(e.getActionCommand());
+		}
+	}
+
+	private static class LoadingPanel extends JPanel {
+		private static final long serialVersionUID = 6543867540490825540L;
+
+		private static final InputStream LOADER = StartChatWithButton.class.getClassLoader()
+				.getResourceAsStream("loading.gif");
+
+		public LoadingPanel() throws IOException {
+			this.setLayout(new BorderLayout());
+
+			JLabel loader = new JLabel();
+			loader.setIcon(new ImageIcon(ImageIO.read(LOADER)));
+			this.add(loader, BorderLayout.CENTER);
 		}
 	}
 
