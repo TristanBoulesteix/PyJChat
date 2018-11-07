@@ -72,6 +72,8 @@ public class Controller implements IController, Observer {
 
 	private void startChatAsServer() {
 		this.serverMaster = new ServerMaster();
+
+		new Thread(this.serverMaster).start();
 	}
 
 	@Override

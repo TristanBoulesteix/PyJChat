@@ -5,7 +5,7 @@ import java.io.InputStream;
 import org.python.core.PyInstance;
 import org.python.util.PythonInterpreter;
 
-public class ServerMaster {
+public class ServerMaster implements Runnable {
 	private static final String CLASS_NAME = "Server()";
 	private static final String RUN_FUNCTION_NAME = "run";
 
@@ -19,6 +19,11 @@ public class ServerMaster {
 		this.pythonInterpreter = new PythonInterpreter();
 
 		this.pythonInterpreter.execfile(this.SERVER_PATH);
+
+	}
+
+	@Override
+	public void run() {
 		this.serverInstance = (PyInstance) this.pythonInterpreter.eval(CLASS_NAME);
 
 		this.serverInstance.invoke(RUN_FUNCTION_NAME);

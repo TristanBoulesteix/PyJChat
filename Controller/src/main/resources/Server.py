@@ -5,14 +5,18 @@ import socket
 import select
 
 class Server:
-    def checkArray():
+    messagesReceived = [];
+    
+    def __init__(self):
+        pass
+    
+    def checkArray(self):
         return messagesReceived;
     
-    def updateArray(messageReceived):
-        messagesReceived.append(messageReceived)
+    def updateArray(self, messageReceived):
+        self.messagesReceived.append(messageReceived)
     
     def run(self):
-        messagesReceived = [];
         hote = ''
         port = 12800
         
@@ -21,9 +25,9 @@ class Server:
         connexion_principale.listen(5)
         print("Le serveur écoute à présent sur le port {}".format(port))
         
-        serveur_lance = True
+        server_running = True
         clients_connectes = []
-        while serveur_lance:
+        while server_running:
             # On va vérifier que de nouveaux clients ne demandent pas à se connecter
             # Pour cela, on écoute la connexion_principale en lecture
             # On attend maximum 50ms
@@ -54,11 +58,10 @@ class Server:
                     msg_recu = client.recv(1024)
                     # Peut planter si le message contient des caractères spéciaux
                     msg_recu = msg_recu.decode()
-                    updateArray("Reçu : {}".format(msg_recu));
-                    print("received")
+                    print("Reçu : {}".format(msg_recu));
                     client.send(b"ok")
-                    if msg_recu == "fin":
-                        serveur_lance = False
+                    if msg_recu == "exit":
+                        server_running = False
         
         print("Fermeture des connexions")
         for client in clients_connectes:
