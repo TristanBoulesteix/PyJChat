@@ -71,7 +71,7 @@ public class Controller implements IController, Observer {
 	}
 
 	private void startChatAsServer() {
-		this.serverMaster = new ServerMaster();
+		this.serverMaster = new ServerMaster(this.model.getAPP_DATA_PATH());
 
 		new Thread(this.serverMaster).start();
 	}

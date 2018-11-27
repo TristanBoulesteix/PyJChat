@@ -9,6 +9,7 @@ import model.dao.SettingsReader;
 public class Model implements IModel {
 	private final SettingsReader SETTINGS_READER;
 	private final SQLiteJDBC DATABASE_READER;
+	private final String APP_DATA_PATH;
 
 	private String version;
 	private String pseudo;
@@ -20,6 +21,7 @@ public class Model implements IModel {
 	public Model() {
 		this.SETTINGS_READER = SettingsReader.getInstance();
 		this.DATABASE_READER = SQLiteJDBC.getInstance();
+		this.APP_DATA_PATH = this.SETTINGS_READER.getSettingINI().getFile().getAbsolutePath();
 	}
 
 	@Override
@@ -102,5 +104,10 @@ public class Model implements IModel {
 
 	private void setChatId(int id) {
 		this.SETTINGS_READER.setValue("CHAT-SETTINGS", "chatID", Integer.toString(id));
+	}
+
+	@Override
+	public String getAPP_DATA_PATH() {
+		return this.APP_DATA_PATH;
 	}
 }

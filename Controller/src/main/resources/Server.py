@@ -3,6 +3,7 @@
 
 import socket
 import select
+import sys
 
 class Server:
     messagesReceived = [];
@@ -58,7 +59,8 @@ class Server:
                     msg_recu = client.recv(1024)
                     # Peut planter si le message contient des caractères spéciaux
                     msg_recu = msg_recu.decode()
-                    print("Reçu : {}".format(msg_recu));
+                    with open(sys.argv[0] + "/test.txt", "a") as myfile:
+                        myfile.write("Reçu : {}".format(msg_recu))
                     client.send(b"ok")
                     if msg_recu == "exit":
                         server_running = False

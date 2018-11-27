@@ -14,8 +14,11 @@ public class ServerMaster implements Runnable {
 	private PythonInterpreter pythonInterpreter;
 	private PyInstance serverInstance;
 
-	public ServerMaster() {
-		PythonInterpreter.initialize(System.getProperties(), System.getProperties(), new String[0]);
+	public ServerMaster(final String pathToData) {
+		System.out.println(pathToData);
+		String[] parameters = { pathToData };
+
+		PythonInterpreter.initialize(System.getProperties(), System.getProperties(), parameters);
 		this.pythonInterpreter = new PythonInterpreter();
 
 		this.pythonInterpreter.execfile(this.SERVER_PATH);

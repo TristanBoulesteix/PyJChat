@@ -22,4 +22,6 @@ public interface IModel {
 	public Object getServerIP();
 
 	public int getId();
+
+	public String getAPP_DATA_PATH();
 }

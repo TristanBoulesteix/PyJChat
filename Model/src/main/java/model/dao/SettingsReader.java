@@ -49,7 +49,7 @@ public class SettingsReader {
 		if (settingFile.exists() && !settingFile.isDirectory()) {
 			this.settingINI = new Wini(settingFile);
 		} else {
-			File file = createINIFile(settingFile);
+			File file = this.createINIFile(settingFile);
 			this.settingINI = new Wini(file);
 		}
 	}
@@ -67,7 +67,7 @@ public class SettingsReader {
 	}
 
 	private File createINIFile(File settingFile) throws IOException {
-		File settingModel = new File(getClass().getClassLoader().getResource("settingsModel.ini").getFile());
+		File settingModel = new File(this.getClass().getClassLoader().getResource("settingsModel.ini").getFile());
 		settingFile.getParentFile().mkdirs();
 		settingFile.createNewFile();
 
@@ -89,5 +89,9 @@ public class SettingsReader {
 
 	public static SettingsReader getInstance() {
 		return (instance == null) ? instance = new SettingsReader() : instance;
+	}
+
+	public Wini getSettingINI() {
+		return this.settingINI;
 	}
 }
